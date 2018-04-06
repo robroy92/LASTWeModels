@@ -1,0 +1,59 @@
+page-root {
+    .root{
+        background-image: url('../assets/imgs/profile.jpg');
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-position: center center;
+        overflow: hidden;
+    }
+    .logo-ctn{
+        position: relative;
+        top: 10%;
+        left: 50%;
+        height: 15%;
+        width: 90%;
+        transform: translate(-50%, 0);
+     //   background-color: blue;
+        display: block;
+    }
+    .logo{
+        position: relative;
+        top: 15px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 70%;
+        display: block;
+    }
+    .already{
+        margin-top: 15px;
+        position: relative;
+        text-align: center;
+        color: white;
+        left:50%;
+        transform: translate(-50%, 0);
+    }
+
+     ion-slides {
+        height: 200px;
+        position: absolute;
+        bottom: 0;
+        overflow: hidden;
+ 
+        ion-slide {
+            color: #fff;
+        }
+ 
+        h4 {
+            font-weight: bold;
+        }
+ 
+        .swiper-pagination-bullet {
+            background: map-get($colors, blanc);
+        }
+        no-scroll{
+            overflow: hidden;
+        }
+    }
+
+
+}

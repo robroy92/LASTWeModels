@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+
+    <ion-buttons left  (tap)="presentModal('ProfilePage')">
+      <button ion-button  icon-only>
+        <img style="position:relative;top:0;transform-origin: translateY(-50%);height:35px;left:5px;border-radius:50px;" src="./assets/imgs/avatar-ts-woody.png">  
+      </button>
+    </ion-buttons>
+
+
+<ion-buttons right (tap)="openPage('SettingsPage', 'options')">
+  <button ion-button  icon-only color="royal">
+    <ion-icon name="ios-settings-outline"></ion-icon>
+  </button>
+</ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+{{user_height}}
+
+    <ion-list>
+
+        <ion-item>
+          <ion-label>E-Mail</ion-label>
+          <ion-toggle [(ngModel)]="ContactMail" ></ion-toggle>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Phone</ion-label>
+          <ion-toggle [(ngModel)]="ContactPhone" ></ion-toggle>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Internal Mail</ion-label>
+          <ion-toggle [(ngModel)]="Contactinternalmail" disabled="true"></ion-toggle>
+        </ion-item>
+      
+      </ion-list>
+
+
+</ion-content>

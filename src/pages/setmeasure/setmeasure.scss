@@ -1,0 +1,29 @@
+page-setmeasure {
+    ion-input{
+        color: white;
+        margin-top:10px;
+        border-bottom: 2px solid white;
+        width: 50%;
+        left: 50%;
+        top: 10px;
+        transform: translate(-50%, 0);
+        text-align: center;
+    }
+    $text-input-placeholder-color : white !important;
+    .text-input-ios{
+        text-align:center;
+    }
+    .button{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-top: 10px;
+        border-radius: 25px;
+        width: 80%;
+        padding: 15px;
+        color: white;
+      //  background-color: blue;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+}
+}

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+
+    <ion-buttons left  (tap)="presentModal('ProfilePage')">
+      <button ion-button  icon-only>
+        <img style="position:relative;top:0;transform-origin: translateY(-50%);height:35px;left:5px;border-radius:50px;" src="./assets/imgs/avatar-ts-woody.png">  
+      </button>
+    </ion-buttons>
+
+
+<ion-buttons right (tap)="openPage('SettingsPage', 'options')">
+  <button ion-button  icon-only color="royal">
+    <ion-icon name="ios-settings-outline"></ion-icon>
+  </button>
+</ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-toolbar>
+        <ion-title>{{instruction}}</ion-title>
+      </ion-toolbar>
+
+<!--{{test}}-->
+
+     <ion-list  *ngIf="show">
+        <ion-item  *ngFor="let x of values" (tap)="presentModal('SetmeasurePage', x.part, x.value, x.url, x.name, x.options)">
+          <ion-thumbnail item-start>
+           <img src="./assets/imgs/{{x.url}}.jpg"/>
+          </ion-thumbnail>
+          <h2>{{x.name}}</h2>
+          <p>{{x.value}}</p>
+          <div class="link-arrow"><ion-icon name="ios-arrow-forward-outline"></ion-icon></div>
+        </ion-item>
+
+      </ion-list>
+
+
+</ion-content>

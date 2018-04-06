@@ -1,0 +1,56 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.telerik.plugins.nativepagetransitions": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "162411954504267",
+      "APP_NAME": "WeModels",
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-native-spinner": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "com.synconset.imagepicker": {
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    },
+    "cordova-plugin-ionic": {
+      "APP_ID": "cec5bab5",
+      "CHANNEL_NAME": "Wemo-TEST",
+      "WARN_DEBUG": "true",
+      "UPDATE_API": "https://api.ionicjs.com",
+      "UPDATE_METHOD": "background",
+      "MAX_STORE": "2",
+      "PACKAGE_NAME": "io.ionic.WeModels"
+    }
+  },
+  "dependent_plugins": {}
+}

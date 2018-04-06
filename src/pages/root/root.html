@@ -1,0 +1,44 @@
+>
+
+<ion-content  class="root"  >
+    <div class="logo-ctn" ion-fixed>
+        <img class="logo" src="./assets/imgs/logoo.png" />
+      </div>
+
+<ion-grid>
+    
+        <ion-slides autoplay="4000" pager loop>
+            <ion-slide >   
+                <h4>Welcome</h4>
+                <p>Get the carreer you deserve</p>
+            </ion-slide>
+            <ion-slide>
+                <h4>Escape</h4>
+                <p>Let us take care of you for the weekend</p>
+            </ion-slide>
+            <ion-slide>
+                <h4>Luxury</h4>
+                <p>Let us take care of you for the weekend</p>
+            </ion-slide>
+        </ion-slides>
+    
+</ion-grid>
+      
+
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <div style="background-color: #222B38; color: white; margin-top: 10px" class="button" (tap)="openPage('CreatePage', 'options')">CREATE AN ACCOUNT</div>
+    </ion-row>
+    <ion-row>
+      <div class="already" center>Already Registred ?</div>
+    </ion-row>
+    <ion-row>
+      <div style="background-color: white; color: black; margin-bottom: 10px" class="button" (tap)="openPage('LoginuserPage', 'options')">LOG IN</div>
+    </ion-row>
+</ion-grid>
+
+
+</ion-footer>

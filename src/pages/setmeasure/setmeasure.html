@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+
+    <ion-buttons start>
+        <button ion-button (tap)="dismiss()">
+          <span ion-text color="primary" showWhen="ios">Cancel</span>
+          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        </button>
+    </ion-buttons>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img style="position:relative; margin-top: 15px; width: 80%; height: auto;  left:50%; transform: translateX(-50%) " src="./assets/imgs/{{url}}.jpg"/>
+
+ <ion-item>
+  <ion-label>Gender</ion-label>
+  <ion-select [(ngModel)]="Test" (ionChange)="selected(Test)">
+    <ion-option *ngFor="let x of options" value="{{x.value}}" >{{x.visuel}}</ion-option>
+  </ion-select>
+</ion-item>
+
+
+      <ion-input [(ngModel)]="ToSave" type="tel" placeholder={{valeur}}></ion-input>
+
+
+  
+
+</ion-content>
+
+<ion-footer>
+<!--  <div ion-button block outline class="btn-save" (tap)="save(ToSave, part)" >SAVE</div>-->
+  <button style="margin-top:5px;background-color:white;width:50%; color:#222B38; " class="button" (tap)="save(ToSave, part)" >Save</button>
+</ion-footer>

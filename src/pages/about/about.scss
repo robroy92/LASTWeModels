@@ -1,0 +1,49 @@
+page-about {
+    .event{
+        background-color: #121212;
+    }
+    .event-card{
+        background-color: white;
+        margin-top: 15px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 10px;
+    }
+    .event-card-header{
+        position: relative;
+        background-color: transparent;
+        height: 120px;
+    }
+    .image-header{
+        position: absolute;
+        height: auto;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .date-header{
+        position: absolute;
+        top: 10px;
+        right: 0;
+        background-color: black;
+        color: white;
+        display: inline-block;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        padding: 5px;
+        padding-left: 10px;
+    }
+
+    .content-event{
+        margin: 10px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+    .content-event-titre{
+        color: black;
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 400;
+        font-size: 18px;
+    }
+}

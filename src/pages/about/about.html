@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+
+    <ion-buttons left  (tap)="presentModal('ProfilePage')">
+      <button ion-button  icon-only>
+        <img style="position:relative;top:0;transform-origin: translateY(-50%);height:35px;left:5px;border-radius:50px;" src="./assets/imgs/avatar-ts-woody.png">  
+      </button>
+    </ion-buttons>
+
+
+<ion-buttons right (tap)="openPage('SettingsPage', 'options')">
+  <button ion-button  icon-only color="royal">
+    <ion-icon name="ios-settings-outline"></ion-icon>
+  </button>
+</ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="event">
+
+
+  <div class="event-card" *ngFor="let x of news">
+    <div class="event-card-header">
+        <img class="image-header" [src]="x.urlToImage"/>
+        <div class="date-header">26 Mars 2013</div>
+    </div>
+    
+    <div class="content-event">
+      <div class="content-event-titre">{{x.title}}</div>
+      {{x.description}}
+    </div>
+  </div>
+  
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "WeModels",
+  "app_id": "cec5bab5",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

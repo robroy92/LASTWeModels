@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+
+    <ion-buttons left  (tap)="presentModal('ProfilePage')">
+      <button ion-button  icon-only>
+        <img style="position:relative;top:0;transform-origin: translateY(-50%);height:35px;left:5px;border-radius:50px;" src="./assets/imgs/avatar-ts-woody.png">  
+      </button>
+    </ion-buttons>
+
+
+<ion-buttons right (tap)="openPage('SettingsPage', 'options')">
+  <button ion-button  icon-only color="royal">
+    <ion-icon name="ios-settings-outline"></ion-icon>
+  </button>
+</ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+
+ 
+<ion-content padding>
+
+    <ion-segment [(ngModel)]="pictures" color="primary">
+
+        <ion-segment-button value="portrait">
+        Portrait
+        </ion-segment-button>
+        
+        <ion-segment-button value="rapproche">
+          Rapproche
+        </ion-segment-button>
+    
+        <ion-segment-button value="eloigne">
+          Eloigne
+        </ion-segment-button>
+    
+      </ion-segment>
+
+      <div [ngSwitch]="pictures" >
+
+        <ion-list *ngSwitchCase="'portrait'" style="height:100%">
+       
+              <div class="sample" *ngFor="let photo of photos">
+                <img  [src]="photo" *ngIf="photo"/>
+                
+              </div>
+
+              <div class="sample">
+              <img  src="./assets/imgs/rapproche.jpg" />
+            </div>
+
+             <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2()">Camera</div>
+             {{log}}
+       
+        </ion-list>
+      
+        <ion-list *ngSwitchCase="'rapproche'">
+       
+            <div class="sample">
+              <img  src="./assets/imgs/rapproche.jpg" />
+            </div>
+    
+           <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetPics()">Camera</div>
+      
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'eloigne'">
+          <div class="sample">
+            <img  src="./assets/imgs/enpied.jpg" />
+          </div>
+  
+         <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2()">Camera</div>
+        
+        </ion-list>
+      </div>
+
+  </ion-content>
+ 

@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Log In</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <div style="margin-top:15px;background-color:#3B5998; color:white; " class="button" (tap)="loginWithFB()">LogIn with Facebook</div>
+    
+    <div class="ormail">or</div>
+
+    <form (ngSubmit)="login()" #registerForm="ngForm">
+
+    <div class="inputDiv">
+      <ion-icon ios="ios-mail-open-outline" md="ios-mail-open-outline"></ion-icon>
+      <input class="inputTA" type="text" name="test" placeholder="E-Mail" [(ngModel)]="user.email" required>
+    </div>
+
+    <div class="inputDiv">
+        <ion-icon ios="ios-backspace" md="md-backspace"></ion-icon>
+        <input class="inputTA" type="password" name="test" placeholder="Password" [(ngModel)]="user.password" required>
+    </div>
+
+  <!--  <div style="margin-top:20px;background-color:#54e410;width:50%; color:white; " class="button" (tap)="login()">LogIn</div>-->
+  <button style="margin-top:20px;background-color:white;width:50%; color:#222B38; " class="button" type="submit" [disabled]="!registerForm.form.valid">Login</button>
+    </form>
+    
+    <div class="conditions">Password Forgetten ?</div>
+
+</ion-content>

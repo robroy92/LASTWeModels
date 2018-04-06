@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+
+    <ion-buttons start>
+      <button ion-button (tap)="dismiss()">
+        <span ion-text color="primary" showWhen="ios,android">Close</span>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="black">
+
+  <ion-grid class="black full">
+    
+    <ion-row class="row50" class="blue">
+      <ion-col col-5>
+        <div style="text-transform:uppercase;text-align:center;font-size:24px;" class="name">Anika T.</div>
+        <div style="text-transform:uppercase;text-align:center;font-size:18px;color:grey;" class="localisation">Paris, IDF</div>
+        <br>
+        <div style="text-transform:uppercase;text-align:center;font-size:18px;color:grey;white-space:nowrap;" class="localisation">Represented By</div>
+        <div style="text-transform:uppercase;text-align:center;font-size:16px;color:white;" class="localisation">Elite</div>
+
+        <div class=" grey marginlarge center">Available In :</div>
+        <div class=" margin center">Paris</div>
+        <div class=" margin center">New York</div>
+        <div class=" margin center">Milan</div>
+
+      </ion-col>
+
+      <ion-col col-7 class="blue">
+        <img style="width:100%;right:0;" src="./assets/imgs/profile.jpg">
+      </ion-col>
+
+    </ion-row>
+    
+    <ion-row class="row25 blue">
+
+        <ion-col col-5 align-self-start>
+        <div class="left grey margin">General Features:</div>
+        <div class="left margin">Nationality : Dutch</div>
+        <div class="left margin">Hair : Blond</div>
+        <div class="left margin">Eyes : Green</div>
+        </ion-col>
+
+
+
+        <ion-col col-7 align-self-start>
+            <div class="left grey margin">Personality:</div>
+            <div class="left margin">3 Words to describe yourself </div>
+            <div class="left margin grey">bla bla bla bla </div>
+            <div class="left margin">Faborite Movie  </div>
+        </ion-col>
+
+    </ion-row>
+
+    <ion-row style="margin-top:50px;">
+
+      <ion-col col-6>
+        <ion-row class="margin"><div class="grey ">Height:</div> {{user_height}}</ion-row>
+        <ion-row class="margin"><div class="grey ">Hips:</div> {{user_hips}}</ion-row>
+        <ion-row class="margin"><div class="grey ">Waist:</div> 123</ion-row>
+      </ion-col>
+
+      <ion-col col-6>
+        <ion-row class="margin"><div class="grey ">Height:</div> 123</ion-row>
+        <ion-row class="margin"><div class="grey ">Chest:</div> 123</ion-row>
+        <ion-row class="margin"><div class="grey ">Waist:</div> 123</ion-row>
+
+      </ion-col>
+
+    </ion-row>
+
+
+
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-toolbar>
+        <ion-title>{{user_first}} {{user_last}}</ion-title>
+      </ion-toolbar>
+      <ion-list>
+        <ion-list-header>Profile</ion-list-header>
+  
+
+        <ion-item>
+            <ion-icon name="ios-calendar-outline" item-start></ion-icon>
+          <ion-label>Unity</ion-label>
+          <ion-select [(ngModel)]="myUnity" interface="action-sheet" (ionChange)="updatevalue(myUnity,'user_unity')">
+            <ion-option value="cm">FR</ion-option>
+            <ion-option value="uk">UK</ion-option>
+          </ion-select>
+        </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-calendar-outline" item-start></ion-icon>
+    <ion-label>Birth Date</ion-label>
+    <ion-datetime displayFormat="DD MMM YYYY" min="2016" max="2020-10-31" [(ngModel)]="myDate" (ionChange)="updatevalue(myDate,'user_birthday')"></ion-datetime>
+  </ion-item>
+
+
+  <ion-item>
+      <ion-icon name="ios-call-outline" item-start></ion-icon>
+    <ion-label color="black">Phone Number</ion-label>
+    <ion-input [(ngModel)]="myPhone" type="tel" (focusout)="updatevalue(myPhone,'user_phone')" placeholder="Please Enter your Phone Number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-mail-outline" item-start></ion-icon>
+    <ion-label color="black">Email</ion-label>
+    <ion-input type="email" [(ngModel)]="myMail"  placeholder="Please Enter your Mail"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-icon name="ios-flag-outline" item-start></ion-icon>
+    <ion-label>Nationality</ion-label>
+    <ion-select [(ngModel)]="nationality">
+      <ion-option selected value="f">French</ion-option>
+      <ion-option value="m">English</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+
+<ion-list>
+  <ion-list-header>Profile</ion-list-header>
+
+  <button ion-item (tap)="openPage()">
+    <ion-icon name="paw" item-start></ion-icon>
+    Contact Method
+  </button>
+
+  <button ion-item (tap)="openPage1()">
+      <ion-icon name="paw" item-start></ion-icon>
+      Working Area
+  </button>
+  </ion-list>
+
+  <div style="background-color: #222B38; color: white;" class="button" (tap)="goDisconnect()">Disconnect</div>
+ <!-- <div style="background-color: blue; color: white;" class="button" (tap)="goDisconnect()">Delete My Account</div>-->
+  
+</ion-content>

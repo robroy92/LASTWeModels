@@ -1,0 +1,74 @@
+<!--
+  Generated template for the CreatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Create An Account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <div style="margin-top:15px;background-color:#3B5998; color:white; " class="button">Register with Facebook</div>
+    
+    <div class="ormail">or by E-mail</div>
+
+    <form (ngSubmit)="create()" #registerForm="ngForm">
+
+    <div class="inputDiv">
+      <ion-icon ios="ios-mail-open-outline" md="ios-mail-open-outline"></ion-icon>
+      <input class="inputTA" type="text" name="email" [(ngModel)]="user.email" placeholder="E-Mail" required>
+    </div>
+
+    <div class="inputDiv">
+        <ion-icon ios="ios-contact-outline" md="ios-contact-outline"></ion-icon>
+        <input class="inputTA" type="password" name="password" [(ngModel)]="user.password" placeholder="Password" required>
+      </div>
+
+      <div class="inputDiv">
+        <ion-icon ios="ios-person-outline" md="ios-person-outline"></ion-icon>
+        <input class="inputTA" type="text" name="first_name" [(ngModel)]="user.first_name" placeholder="First Name" required>
+      </div>
+
+      <div class="inputDiv">
+        <ion-icon ios="ios-person-outline" md="ios-person-outline"></ion-icon>
+        <input class="inputTA" type="text" name="last_name" [(ngModel)]="user.last_name" placeholder="Last Name" required>
+      </div>
+  
+      <div class="inputDiv">
+    <div class="inputTA">
+      <ion-icon ios="ios-person-outline" md="ios-person-outline"></ion-icon>
+      <ion-select interface="action-sheet" [(ngModel)]="user.gender" name="gender" placeholder="Gender" required>
+        <ion-option value="f">Female</ion-option>
+        <ion-option value="m">Male</ion-option>
+      </ion-select>
+    </div>
+  </div>
+
+    <div class="inputDiv" ion-button (click)="picker.open()">
+        <ion-icon name="calendar"></ion-icon>
+      <ion-datetime class="inputTA" #picker pickerFormat="DD MMMM YYYY" [min]="datePickerMin" name="birthday0" placeholder="Gender" [(ngModel)]="datePicker"></ion-datetime>
+    </div>
+
+    <button style="margin-top:20px;background-color:white;width:50%; color:black; " class="button" type="submit" [disabled]="!registerForm.form.valid" >Register</button>
+    </form>
+
+    <div class="conditions">By Register here, you accept our <span style="text-decoration: underline;" (tap)="presentModal('Application')">Application Process & Rules</span> and <span style="text-decoration: underline;" (tap)="presentModal('Application')">our Privacy Policy</span></div>
+
+
+</ion-content>
+
+<ion-card *ngIf="userData">
+  <ion-card-header>{{ userData.username }}</ion-card-header>
+  <img [src]="userData.picture" />
+  <ion-card-content>
+    <p>Email: {{ userData.email }}</p>
+    <p>First Name: {{ userData.first_name }}</p>
+    <p>First Name: {{ userData.gender }}</p>
+  </ion-card-content>
+</ion-card>
