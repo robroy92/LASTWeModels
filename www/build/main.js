@@ -63,6 +63,7 @@ var ContactmethodPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_storage__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_image_picker__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_savevalue_savevalue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_authuser_authuser__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -81,8 +82,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //import { Img } from 'ionic-angular/components/img/img-interface';
 
 
+
 var LoginPage = /** @class */ (function () {
-    function LoginPage(navCtrl, navParams, nativePageTransitions, modalCtrl, camera, nativeStorage, imagePicker, savepic) {
+    function LoginPage(navCtrl, navParams, nativePageTransitions, modalCtrl, camera, nativeStorage, imagePicker, savepic, auth) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.nativePageTransitions = nativePageTransitions;
@@ -91,14 +93,14 @@ var LoginPage = /** @class */ (function () {
         this.nativeStorage = nativeStorage;
         this.imagePicker = imagePicker;
         this.savepic = savepic;
+        this.auth = auth;
         this.title = 'Pictures';
         this.photos = [];
         this.log = [];
         this.pictures = 'portrait';
     }
     LoginPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad LoginPage');
-        // this.GetPicture()
+        this.auth.getID(this.uid);
     };
     LoginPage.prototype.openPage = function (page) {
         var options = {
@@ -119,7 +121,7 @@ var LoginPage = /** @class */ (function () {
         var modal = this.modalCtrl.create(elem);
         modal.present();
     };
-    LoginPage.prototype.GetCamera2 = function () {
+    LoginPage.prototype.GetCamera2 = function (type) {
         var _this = this;
         var options = {
             quality: 70,
@@ -131,16 +133,16 @@ var LoginPage = /** @class */ (function () {
         };
         this.camera.getPicture(options).then(function (imageData) {
             _this.base64Image = 'data:image/jpeg;base64,' + imageData;
-            _this.save(_this.base64Image);
+            _this.save(_this.base64Image, _this.uid, type);
             _this.photos.push(_this.base64Image);
             _this.photos.reverse();
             // this.nativeStorage.setItem('picture', base64Image)
         }, function (err) {
         });
     };
-    LoginPage.prototype.save = function (elem) {
+    LoginPage.prototype.save = function (elem, elem1, elem2) {
         var _this = this;
-        this.savepic.saveImage(elem).subscribe(function (picture) {
+        this.savepic.saveImage(elem, elem1, elem2).subscribe(function (picture) {
             _this.log = picture;
         });
     };
@@ -156,18 +158,12 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"E:\CloudStation\transfert\LASTWeModels\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      {{title}}\n    </ion-title>\n\n    <ion-buttons left  (tap)="presentModal(\'ProfilePage\')">\n      <button ion-button  icon-only>\n        <img style="position:relative;top:0;transform-origin: translateY(-50%);height:35px;left:5px;border-radius:50px;" src="./assets/imgs/avatar-ts-woody.png">  \n      </button>\n    </ion-buttons>\n\n\n<ion-buttons right (tap)="openPage(\'SettingsPage\', \'options\')">\n  <button ion-button  icon-only color="royal">\n    <ion-icon name="ios-settings-outline"></ion-icon>\n  </button>\n</ion-buttons>\n\n\n  </ion-navbar>\n</ion-header>\n\n \n<ion-content padding>\n\n    <ion-segment [(ngModel)]="pictures" color="primary">\n\n        <ion-segment-button value="portrait">\n        Portrait\n        </ion-segment-button>\n        \n        <ion-segment-button value="rapproche">\n          Rapproche\n        </ion-segment-button>\n    \n        <ion-segment-button value="eloigne">\n          Eloigne\n        </ion-segment-button>\n    \n      </ion-segment>\n\n      <div [ngSwitch]="pictures" >\n\n        <ion-list *ngSwitchCase="\'portrait\'" style="height:100%">\n       \n              <div class="sample" *ngFor="let photo of photos">\n                <img  [src]="photo" *ngIf="photo"/>\n                \n              </div>\n\n              <div class="sample">\n              <img  src="./assets/imgs/rapproche.jpg" />\n            </div>\n\n             <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2()">Camera</div>\n             {{log}}\n       \n        </ion-list>\n      \n        <ion-list *ngSwitchCase="\'rapproche\'">\n       \n            <div class="sample">\n              <img  src="./assets/imgs/rapproche.jpg" />\n            </div>\n    \n           <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetPics()">Camera</div>\n      \n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'eloigne\'">\n          <div class="sample">\n            <img  src="./assets/imgs/enpied.jpg" />\n          </div>\n  \n         <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2()">Camera</div>\n        \n        </ion-list>\n      </div>\n\n  </ion-content>\n \n'/*ion-inline-end:"E:\CloudStation\transfert\LASTWeModels\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"E:\CloudStation\transfert\LASTWeModels\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      {{title}}\n    </ion-title>\n\n    <ion-buttons left  (tap)="presentModal(\'ProfilePage\')">\n      <button ion-button  icon-only>\n        <img style="position:relative;top:0;transform-origin: translateY(-50%);height:35px;left:5px;border-radius:50px;" src="./assets/imgs/avatar-ts-woody.png">  \n      </button>\n    </ion-buttons>\n\n\n<ion-buttons right (tap)="openPage(\'SettingsPage\', \'options\')">\n  <button ion-button  icon-only color="royal">\n    <ion-icon name="ios-settings-outline"></ion-icon>\n  </button>\n</ion-buttons>\n\n\n  </ion-navbar>\n</ion-header>\n\n \n<ion-content padding>\n\n    <ion-segment [(ngModel)]="pictures" color="primary">\n\n        <ion-segment-button value="portrait">\n        Portrait\n        </ion-segment-button>\n        \n        <ion-segment-button value="rapproche">\n          Rapproche\n        </ion-segment-button>\n    \n        <ion-segment-button value="eloigne">\n          Eloigne\n        </ion-segment-button>\n    \n      </ion-segment>\n\n      <div [ngSwitch]="pictures" >\n\n        <ion-list *ngSwitchCase="\'portrait\'" style="height:100%">\n       \n              <div class="sample" *ngFor="let photo of photos">\n                <img  [src]="photo" *ngIf="photo"/>\n                \n              </div>\n\n              <div class="sample">\n              <img  src="./assets/imgs/rapproche.jpg" />\n            </div>\n\n             <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2(\'portrait\')">Camera</div>\n             \n       \n        </ion-list>\n      \n        <ion-list *ngSwitchCase="\'rapproche\'">\n       \n            <div class="sample">\n              <img  src="./assets/imgs/rapproche.jpg" />\n            </div>\n    \n           <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2(\'rapproche\')">Camera</div>\n      \n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'eloigne\'">\n          <div class="sample">\n            <img  src="./assets/imgs/enpied.jpg" />\n          </div>\n  \n         <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2(\'eloigne\')">Camera</div>\n        \n        </ion-list>\n      </div>\n\n  </ion-content>\n \n'/*ion-inline-end:"E:\CloudStation\transfert\LASTWeModels\src\pages\login\login.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_page_transitions__["a" /* NativePageTransitions */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_storage__["a" /* NativeStorage */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_image_picker__["a" /* ImagePicker */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_savevalue_savevalue__["a" /* SavevalueProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_page_transitions__["a" /* NativePageTransitions */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_page_transitions__["a" /* NativePageTransitions */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_storage__["a" /* NativeStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_native_storage__["a" /* NativeStorage */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_image_picker__["a" /* ImagePicker */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_image_picker__["a" /* ImagePicker */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__providers_savevalue_savevalue__["a" /* SavevalueProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_savevalue_savevalue__["a" /* SavevalueProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_7__providers_authuser_authuser__["a" /* AuthuserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_authuser_authuser__["a" /* AuthuserProvider */]) === "function" && _j || Object])
     ], LoginPage);
     return LoginPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=login.js.map
@@ -578,8 +574,9 @@ var HomePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthuserProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -592,6 +589,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var User = /** @class */ (function () {
     function User(email, password) {
         this.email = '';
@@ -601,8 +599,9 @@ var User = /** @class */ (function () {
 }());
 
 var AuthuserProvider = /** @class */ (function () {
-    function AuthuserProvider(http) {
+    function AuthuserProvider(http, nativeStorage) {
         this.http = http;
+        this.nativeStorage = nativeStorage;
         this.url = 'http://bmyscouter.co/db/mobile/login.php';
     }
     AuthuserProvider.prototype.login = function (page, Username, Password) {
@@ -613,11 +612,15 @@ var AuthuserProvider = /** @class */ (function () {
         });
     };
     ;
+    AuthuserProvider.prototype.getID = function (uid) {
+        this.nativeStorage.getItem('uid').then(function (data) { return uid = data; });
+    };
     AuthuserProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_storage__["a" /* NativeStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_native_storage__["a" /* NativeStorage */]) === "function" && _b || Object])
     ], AuthuserProvider);
     return AuthuserProvider;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=authuser.js.map
@@ -930,12 +933,10 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"E:\CloudStation\transfert\LASTWeModels\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"E:\CloudStation\transfert\LASTWeModels\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_storage__["a" /* NativeStorage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_storage__["a" /* NativeStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_native_storage__["a" /* NativeStorage */]) === "function" && _d || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -950,6 +951,7 @@ var MyApp = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_spinner_dialog__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_storage__ = __webpack_require__(37);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -962,10 +964,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//Native
+
 var SavevalueProvider = /** @class */ (function () {
-    function SavevalueProvider(http, spinnerDialog) {
+    function SavevalueProvider(http, spinnerDialog, nativeStorage) {
         this.http = http;
         this.spinnerDialog = spinnerDialog;
+        this.nativeStorage = nativeStorage;
     }
     SavevalueProvider.prototype.savebody = function (elem, elem1) {
         var donnee = { value: elem, part: elem1 };
@@ -1032,11 +1037,12 @@ var SavevalueProvider = /** @class */ (function () {
             console.log("The POST observable is now completed.");
         });
     };
-    SavevalueProvider.prototype.saveImage = function (elem) {
+    SavevalueProvider.prototype.saveImage = function (elem, elem1, elem2) {
         var url = 'http://bmyscouter.co/db/mobile/getImage.php';
-        var url2 = 'http://boulanger.wf/romain/models/test.php';
         var postData = new FormData();
         postData.append('file', elem);
+        postData.append('userid', elem1);
+        postData.append('type', elem2);
         console.log('envoi');
         var data = this.http.post(url, postData);
         return data.map((function (result) {
@@ -1054,10 +1060,10 @@ var SavevalueProvider = /** @class */ (function () {
     };
     SavevalueProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_spinner_dialog__["a" /* SpinnerDialog */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_spinner_dialog__["a" /* SpinnerDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_spinner_dialog__["a" /* SpinnerDialog */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_storage__["a" /* NativeStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_native_storage__["a" /* NativeStorage */]) === "function" && _c || Object])
     ], SavevalueProvider);
     return SavevalueProvider;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=savevalue.js.map

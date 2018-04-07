@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-// Native
-//import { NativeStorage } from '@ionic-native/native-storage';
-
 
 import { TabsPage } from '../../pages/tabs/tabs';
+import { NativeStorage } from '@ionic-native/native-storage';
+
+
 
 
 import 'rxjs/add/operator/map';
@@ -28,6 +28,7 @@ export class AuthuserProvider {
   
   constructor(
   private http: HttpClient,
+  private nativeStorage: NativeStorage,
 )
 {
 
@@ -46,7 +47,11 @@ export class AuthuserProvider {
    ); 
   };
     
-
+  public getID(uid){
+    this.nativeStorage.getItem('uid').then(
+      data => uid = data
+    );
+  }
 
 
 }

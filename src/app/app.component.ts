@@ -14,6 +14,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 export class MyApp {
   rootPage:any = RootPage;
 // A change have been here : rootPage:any = TabsPage;
+ 
 
   constructor(
     platform: Platform, 

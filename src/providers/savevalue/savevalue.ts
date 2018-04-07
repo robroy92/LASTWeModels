@@ -3,15 +3,21 @@ import { Injectable } from '@angular/core';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { Observable } from 'rxjs/Observable';
 
+//Native
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Injectable()
 export class SavevalueProvider {
   
   val: object;
+  
 
   constructor(public http: HttpClient, 
-    private spinnerDialog: SpinnerDialog
+    private spinnerDialog: SpinnerDialog,
+    private nativeStorage: NativeStorage
   ) {
+    
+    
   }
   
 
@@ -109,12 +115,14 @@ getsettings(page, elem) : any {
 });
 }
 
-saveImage(elem){
+saveImage(elem,elem1,elem2){
   let url = 'http://bmyscouter.co/db/mobile/getImage.php';
-  let url2 = 'http://boulanger.wf/romain/models/test.php';
 
   let postData = new FormData();
   postData.append('file', elem);
+  postData.append('userid', elem1);
+  postData.append('type', elem2);
+
   console.log('envoi');
   let data:Observable<any> = this.http.post(url, postData);
   return data.map((result => {
@@ -122,6 +130,11 @@ saveImage(elem){
     return result;
   }));
 }
+
+
+
+
+
 
 getProfile<Observable>() {
   const elem = 'test';

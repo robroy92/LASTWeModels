@@ -9,6 +9,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 //import { Img } from 'ionic-angular/components/img/img-interface';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { SavevalueProvider } from '../../providers/savevalue/savevalue' ;
+import { AuthuserProvider } from '../../providers/authuser/authuser';
 
 
 @IonicPage()
@@ -26,7 +27,7 @@ export class LoginPage {
   public photos : any =[];
   base64Image: string;
   log : any = [];
-  
+  uid : number; 
 
   constructor(
     public navCtrl: NavController, 
@@ -37,15 +38,16 @@ export class LoginPage {
     private nativeStorage: NativeStorage,
     private imagePicker: ImagePicker,
     public savepic: SavevalueProvider, 
+    public auth: AuthuserProvider,
   ) 
   {
    this.pictures= 'portrait';
 
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-   // this.GetPicture()
+    this.auth.getID(this.uid);
   }
 
 
@@ -75,7 +77,7 @@ export class LoginPage {
   }
 
 
-  GetCamera2(){
+  GetCamera2(type){
     const options: CameraOptions = {
       quality: 70,
       targetWidth: 1024,
@@ -84,10 +86,12 @@ export class LoginPage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
+
+
     
     this.camera.getPicture(options).then((imageData) => {
      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-     this.save(this.base64Image);
+     this.save(this.base64Image,this.uid,type);
      this.photos.push(this.base64Image);
      this.photos.reverse();
     // this.nativeStorage.setItem('picture', base64Image)
@@ -95,8 +99,8 @@ export class LoginPage {
     });
   }
 
-  save(elem){
-    this.savepic.saveImage(elem).subscribe(
+  save(elem,elem1,elem2){
+    this.savepic.saveImage(elem,elem1,elem2).subscribe(
       (picture)=> {
        this.log = picture;
       }

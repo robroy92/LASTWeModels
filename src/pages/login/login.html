@@ -53,8 +53,8 @@
               <img  src="./assets/imgs/rapproche.jpg" />
             </div>
 
-             <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2()">Camera</div>
-             {{log}}
+             <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2('portrait')">Camera</div>
+             
        
         </ion-list>
       
@@ -64,7 +64,7 @@
               <img  src="./assets/imgs/rapproche.jpg" />
             </div>
     
-           <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetPics()">Camera</div>
+           <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2('rapproche')">Camera</div>
       
         </ion-list>
 
@@ -73,7 +73,7 @@
             <img  src="./assets/imgs/enpied.jpg" />
           </div>
   
-         <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2()">Camera</div>
+         <div style="margin-top:15px;background-color:#222B38; color:white; " class="button" (tap)="GetCamera2('eloigne')">Camera</div>
         
         </ion-list>
       </div>
